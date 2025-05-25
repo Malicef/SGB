@@ -1,10 +1,12 @@
+from datatime import datatime, timedelta
 from model.emprestado import Emprestimo
+from model.usuario import Usuario
 from peewee import DoesNotExist
 
 class EmprestimoController:
 
     @staticmethod
-    def emprestarLivro(idLivro, idUsuario, dataEmprestimo, dataDevolucaoPrevista):
+    def criarEmprestimo(idLivro, idUsuario, dataEmprestimo, dataDevolucaoPrevista):
         try:
             Emprestimo.create(idLivro=idLivro, idUsuario=idUsuario, dataEmprestimo=dataEmprestimo, dataDevolucaoPrevista=dataDevolucaoPrevista, devolvido=False)
             return Emprestimo
@@ -31,6 +33,29 @@ class EmprestimoController:
             return None
         except Exception:
             return None
+
+    @staticmethod
+    def pedirEmprestimo(id_usuario, id_livro):
+        try:
+            usuario = Usuario.get_by_id(id_usuario)
+            emprestimo = Emprestimo.create(
+                livro.id_livro,
+                usuario=usuario,
+                data_solicitacao=datetime.now(),
+                status = Emprestimo.STATUS_PENDENTE
+            )
+
+            return {
+                "sucesso": True,
+                "emprestimo": emprestimo,
+                "mensage": "Solicitação de empréstimo criada com sucesso, aguarde aprovação."
+            }
+        except DoesNotExist:
+            return {"success": False, "message": "Usuário ou livro não encontrado."}
+        except Exception as e:
+            return {"success": False, "message": f"Erro ao solicitar empréstimo: {str(e)}"}
+
+
 
 
 
