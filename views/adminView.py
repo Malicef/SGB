@@ -153,22 +153,6 @@ class Admin:
         else:
             messagebox.showerror("Erro", "Erro ao criar livro. Verifique os dados.")
 
-    
-    # def criar_livro(self):
-    #     nome = self.nome_entry.get().strip()
-    #     autor = self.autor_entry.get().strip()
-    #     resumo = self.resumo_entry.get("1.0", "end").strip()
-
-    #     resultado = self.ctrl.criar_livro(nome, autor, resumo)
-
-    #     if resultado is True:
-    #         messagebox.showinfo("Sucesso", "Livro criado com sucesso!")
-    #         self.nome_entry.delete(0, 'end')
-    #         self.autor_entry.delete(0, 'end')
-    #         self.resumo_entry.delete("1.0", 'end')
-    #         self.show_content("listar_livros")
-    #     else:
-    #         messagebox.showerror("Erro", "Erro ao criar livro. Verifique os dados.")
 
     def update_listar_livros(self):
         for item in self.tree.get_children():
