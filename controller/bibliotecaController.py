@@ -1,10 +1,10 @@
-from model.livro import Livro
+# from model.livro import Livro
 from model.acervo import Acervo
 from controller.administradorController import adiministradorController
 from controller.loginadm import loginadm
 
 
-class BibliotecaControllerr:
+class BibliotecaController:
     def __init__(self):
         self.acervo = Acervo()
         
@@ -65,22 +65,23 @@ class BibliotecaControllerr:
         adm.criar_adm(nome,cpf, senha)
         
       
-    def criar_livro(self):
+    def criar_livro(self, nome, autor, resumo):
         nome = input("Digite o nome do livro: ").strip()
         if not nome:
             print("Erro: nome do livro não pode ser vazio.")
-            return
+            return False
 
         autor = input("Digite autor do livro: ").strip()
         resumo = input("Digite resumo: ").strip()
 
        
 
-        self.acervo.criar_livro(nome, autor, resumo)
+        self.acervo.criar_livro(self, nome, autor, resumo)
         print("Livro criado com sucesso!")
+        return True
   
     
     def listar_livros(self):
-        self.acervo.listar_livros()
+        return self.acervo.listar_livros()
 
 
