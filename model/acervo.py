@@ -1,3 +1,5 @@
+from .livro import Livro
+from controller.livroController import LivroController
 # from livro import Livro
 from controller.livroController import LivroController
 

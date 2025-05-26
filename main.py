@@ -6,10 +6,12 @@ sys.path.append(str(Path(__file__).parent))  # Adiciona a raiz ao PATH
 from controller.bibliotecaController import BibliotecaController
 from db.db import db
 from model.livro import Livro
+from model.administrador import administrador
 
 def main():
     db.connect()
     db.create_tables([Livro])
+    db.create_tables([administrador])
 
     try:
         controller = BibliotecaController()
