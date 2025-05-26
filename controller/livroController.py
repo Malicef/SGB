@@ -25,7 +25,10 @@ class LivroController:
             livro.save()
 
     
-    def deletar_por_titulo(nome):
+    def deletar_por_titulo(self, nome):
         livro = Livro.get_or_none(Livro.nome == nome)
         if livro:
             livro.delete_instance()
+            return True
+        return False
+
