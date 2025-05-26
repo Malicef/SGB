@@ -1,13 +1,22 @@
 from model.livro import Livro
 from model.acervo import Acervo
+from controller.administradorController import adiministradorController
+from controller.loginadm import loginadm
 
 
 class BibliotecaControllerr:
     def __init__(self):
-        self.acervo = Acervo()  
+        self.acervo = Acervo()
+        
     
     def executar(self):
+        self.login()
+        
+        
         while True:
+            
+            
+            
             op = input("0-sair\n1-criar livro\n2-listar livro\n").strip()
             if not op.isdigit():
                 print("Digite uma opção válida.")
@@ -25,6 +34,36 @@ class BibliotecaControllerr:
                 break
             else:
                 print("Opção inválida")
+                
+                
+    def login(self):
+        
+        while True:
+            log = loginadm()
+            nome = input("nome:")
+            senha = input("senha:")
+            
+            i = log.adm_nome(nome)
+            j = log.adm_senha(senha)
+            
+            
+            if i==None or j==None :
+                print("nome ou senha não existe")
+                continue
+            else:
+                break
+            
+            
+        
+    def criar_adm(self):
+        adm = adiministradorController()
+        
+        nome =input("digite nome:")
+        senha = input("digite senha:")
+        cpf = input("digite cpf:")
+        
+        adm.criar_adm(nome,cpf, senha)
+        
       
     def criar_livro(self):
         nome = input("Digite o nome do livro: ").strip()

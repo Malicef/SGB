@@ -1,4 +1,4 @@
-from model.emprestado import Emprestimo
+from model.emprestimo import Emprestimo
 from peewee import DoesNotExist
 
 class EmprestimoController:
