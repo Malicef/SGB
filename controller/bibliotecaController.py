@@ -10,12 +10,11 @@ class BibliotecaController:
         
     
     def executar(self):
+        # self.criar_adm()
         self.login()
         
         
         while True:
-            
-            
             
             op = input("0-sair\n1-criar livro\n2-listar livro\n").strip()
             if not op.isdigit():
@@ -37,17 +36,16 @@ class BibliotecaController:
                 
                 
     def login(self):
-        
         while True:
-            log = loginadm()
-            nome = input("nome:")
-            senha = input("senha:")
+            self.log = loginadm()
+            self.nome = input("nome:")
+            self.senha = input("senha:")
             
-            i = log.adm_nome(nome)
-            j = log.adm_senha(senha)
+            self.i = self.log.adm_nome(self.nome)
+            self.j = self.log.adm_senha(self.senha)
             
             
-            if i==None or j==None :
+            if self.i==None or self.j==None :
                 print("nome ou senha não existe")
                 continue
             else:
@@ -56,13 +54,13 @@ class BibliotecaController:
             
         
     def criar_adm(self):
-        adm = adiministradorController()
+        self.adm = adiministradorController()
         
-        nome =input("digite nome:")
-        senha = input("digite senha:")
-        cpf = input("digite cpf:")
+        self.nome =input("digite nome:")
+        self.senha = input("digite senha:")
+        self.cpf = input("digite cpf:")
         
-        adm.criar_adm(nome,cpf, senha)
+        self.adm.criar_adm(self.nome,self.cpf, self.senha)
         
       
     def criar_livro(self, nome, autor, resumo):
@@ -73,8 +71,6 @@ class BibliotecaController:
 
         autor = input("Digite autor do livro: ").strip()
         resumo = input("Digite resumo: ").strip()
-
-       
 
         self.acervo.criar_livro(self, nome, autor, resumo)
         print("Livro criado com sucesso!")

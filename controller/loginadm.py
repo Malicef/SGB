@@ -3,18 +3,14 @@ from .administradorController import adiministradorController
 
 class loginadm():
     
-    
     def adm_nome(self, nome):
-        adm = adiministradorController()
+        self.adm = adiministradorController()
         
-        resultado = adm.buscar_por_nome(nome)
-
-        return resultado
+        self.resultado = self.adm.buscar_por_nome(nome)
+        return self.resultado
             
     def adm_senha(self, senha):
-        adm = adiministradorController()
+        self.adm = adiministradorController()
         
-        resultado = adm.buscar_por_senha(senha)
-
-            
-        return resultado
+        self.resultado = self.adm.buscar_por_senha(senha)
+        return self.resultado

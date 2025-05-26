@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import messagebox, ttk
 from controller.bibliotecaController import BibliotecaController
 from model.acervo import Acervo
+from controller.emprestimoController import EmprestimoController
+from datetime import datetime
 
 
 class Admin:
@@ -31,7 +33,8 @@ class Admin:
         menu = [
             ("📚 Listar Livros", "listar_livros"),
             ("📖 Criar Livro", "criar_livros"),
-            ("🗑️ Deletar Livro", "deletar_livros")
+            ("🗑️ Deletar Livro", "deletar_livros"),
+            ("📒 Emprestar Livro", "emprestar_livro")
         ]
 
         for text, command in menu:
@@ -54,6 +57,8 @@ class Admin:
         self.frames["listar_livros"] = self.create_listar_livros_frame()
         self.frames["criar_livros"] = self.create_criar_livros_frame()
         self.frames["deletar_livros"] = self.create_deletar_livros_frame() #-> opcao deletar livro
+        # self.frames["emprestar_livro"] = self.create_emprestar_livro_frame()
+
 
     # Deletar livro 
     def create_deletar_livros_frame(self):
@@ -66,6 +71,57 @@ class Admin:
         tk.Button(frame, text="Deletar Livro", command=self.deletar_livro).pack(pady=15)
 
         return frame
+
+    # def create_emprestar_livro_frame(self):
+    #     frame = tk.Frame(self.main_content, bg='white', padx=20, pady=20)
+
+    #     tk.Label(frame, text="Nome do Livro:", bg='white').pack(anchor='w')
+    #     self.nome_livro_entry = tk.Entry(frame)
+    #     self.nome_livro_entry.pack(fill='x')
+
+    #     tk.Label(frame, text="CPF do Usuário:", bg='white').pack(anchor='w', pady=(10, 0))
+    #     self.cpf_usuario_entry = tk.Entry(frame)
+    #     self.cpf_usuario_entry.pack(fill='x')
+
+    #     tk.Label(frame, text="Data do Empréstimo (AAAA-MM-DD):", bg='white').pack(anchor='w', pady=(10, 0))
+    #     self.data_emprestimo_entry = tk.Entry(frame)
+    #     self.data_emprestimo_entry.pack(fill='x')
+
+    #     tk.Label(frame, text="Data Prevista de Devolução (AAAA-MM-DD):", bg='white').pack(anchor='w', pady=(10, 0))
+    #     self.data_prevista_entry = tk.Entry(frame)
+    #     self.data_prevista_entry.pack(fill='x')
+
+    #     tk.Button(frame, text="Confirmar Empréstimo", command=self.confirmar_emprestimo).pack(pady=15)
+
+    #     return frame
+
+
+    # def confirmar_emprestimo(self):
+    #     try:
+    #         nome_livro = self.nome_livro_entry.get().strip()
+    #         cpf_usuario = self.cpf_usuario_entry.get().strip()
+    #         data_emprestimo = datetime.strptime(self.data_emprestimo_entry.get(), "%Y-%m-%d").date()
+    #         data_prevista = datetime.strptime(self.data_prevista_entry.get(), "%Y-%m-%d").date()
+
+    #         if not nome_livro or not cpf_usuario:
+    #             messagebox.showwarning("Campos obrigatórios", "Preencha o nome do livro e o CPF do usuário.")
+    #             return
+
+    #         resultado = EmprestimoController.emprestar_por_nome_e_cpf(
+    #             nome_livro, cpf_usuario, data_emprestimo, data_prevista
+    #         )
+
+    #         if resultado:
+    #             messagebox.showinfo("Sucesso", "Empréstimo registrado com sucesso!")
+    #             self.nome_livro_entry.delete(0, 'end')
+    #             self.cpf_usuario_entry.delete(0, 'end')
+    #             self.data_emprestimo_entry.delete(0, 'end')
+    #             self.data_prevista_entry.delete(0, 'end')
+    #         else:
+    #             messagebox.showerror("Erro", "Erro ao registrar empréstimo. Verifique os dados.")
+    #     except Exception as e:
+    #         messagebox.showerror("Erro", f"Entrada inválida: {e}")
+
 
 
     def deletar_livro(self):
