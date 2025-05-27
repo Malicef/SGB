@@ -4,15 +4,16 @@ from peewee import DoesNotExist
 class EmprestimoController:
 
     @staticmethod
-    def emprestarLivro(idLivro, idUsuario, dataEmprestimo, dataDevolucaoPrevista):
+    def emprestarLivro(self, idLivro, idUsuario, dataEmprestimo, dataDevolucaoPrevista):
         try:
-            Emprestimo.create(idLivro=idLivro, idUsuario=idUsuario, dataEmprestimo=dataEmprestimo, dataDevolucaoPrevista=dataDevolucaoPrevista, devolvido=False)
-            return Emprestimo
+            emprestimo = Emprestimo.create(idLivro=idLivro, idUsuario=idUsuario, dataEmprestimo=dataEmprestimo, dataDevolucaoPrevista=dataDevolucaoPrevista, devolvido=False)
+            return emprestimo
         except Exception as e:
+            print('Erro ao emprestar livro: ', e)
             return None
     
     @staticmethod
-    def devolucaoLivro(idEmprestimo, dataDevolucaoReal):
+    def devolucaoLivro(self, idEmprestimo, dataDevolucaoReal):
         try: 
             emprestado = Emprestimo.get((Emprestimo.id == idEmprestimo) & (Emprestimo.devolvido == False))
             emprestado.dataDevolucaoReal = dataDevolucaoReal
@@ -22,17 +23,15 @@ class EmprestimoController:
             emprestado.save()
 
             return {
-                "emprestimo": emprestimo,
+                "emprestimo": emprestado,
                 "atrasado": atrasado,
-                "dias_atraso": (dataDevolucaoReal - emprestimo.dataDevolucaoPrevista).days if atrasado else 0
+                "dias_atraso": (dataDevolucaoReal - emprestado.dataDevolucaoPrevista).days if atrasado else 0
             }
 
         except DoesNotExist:
+            print("Empréstimo não encontrado.")
             return None
-        except Exception:
+        except Exception as e:
+            print("Erro ao devolver livro:", e)
             return None
-
-
-
-
 
