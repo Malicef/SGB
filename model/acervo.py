@@ -12,7 +12,4 @@ class Acervo:
 
     def listar_livros(self):
         dao = LivroController()
-        return dao.listar_livros() 
-        # livros = dao.listar_livros() 
-        # for livro in livros:
-        #     livro.exibir()
+        return dao.listar_livros()
